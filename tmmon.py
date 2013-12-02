@@ -88,7 +88,7 @@ class TMMon(QtGui.QWidget):
 	self.ERewardValue.setFixedWidth(200)
 
 	self.HashRate = QtGui.QLabel("Total Hashrate:", self)
-	self.HashRateValue = QtGui.QLabel("%d" % (int(result['hashrate'])), self)
+	self.HashRateValue = QtGui.QLabel("%.4f" % (float(result['hashrate'])), self)
 	self.HashRate.move (15, 5+(7*spacing))
 	self.HashRateValue.move (300,5+(7*spacing))
 	self.HashRate.setFont(font)
@@ -151,7 +151,7 @@ class TMMon(QtGui.QWidget):
 
 	self.RewardValue.setText("%.8f" % (float(result['confirmed_reward'])))
 	self.ERewardValue.setText("%.8f" % (float(result['estimated_payout'])))
-	self.HashRateValue.setText("%d" % (int(result['hashrate'])))
+	self.HashRateValue.setText("%.4f" % (float(result['hashrate'])))
 
 	for worker, value in result['workers'].iteritems():
 	    self.WorkerValue[i].setText("%s" % (value["shares"]))
@@ -159,6 +159,7 @@ class TMMon(QtGui.QWidget):
 		self.WorkerValue[i].setPalette(GREEN)
 	    else:
 		self.WorkerValue[i].setPalette(RED)
+	    i += 1
 
 	QtCore.QTimer.singleShot(self.updatespeed*1000,self.updateTickers)
 
